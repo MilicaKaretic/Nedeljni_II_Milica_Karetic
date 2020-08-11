@@ -324,6 +324,7 @@ namespace Nedeljni_II_Milica_Karetic.ViewModel
                             if(v.AnyClinics())
                             {
                                 CreateClinic clinic = new CreateClinic();
+                                view.Close();
                                 clinic.Show();
                             }
                             else

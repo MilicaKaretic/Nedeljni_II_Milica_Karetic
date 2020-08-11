@@ -106,7 +106,40 @@ namespace Nedeljni_II_Milica_Karetic
 
         public bool ValidClinic(tblClinic clinic)
         {
-            return true;
+            if (clinic.ClinicFloorNumber > 0)
+            {
+                if(clinic.RoomsPerFloor > 0)
+                {
+                    if(clinic.EmergencyVehicleParkingLoots >= 0)
+                    {
+                        if(clinic.InvalidVehicleParkingLoots >= 0)
+                        {
+                            return true;
+                        }
+                        else
+                        {
+                            MessageBox.Show("Invalid patient access point can't be negative.");
+                            return false;
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("Ambulance access point can't be negative.");
+                        return false;
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Number rooms per floor must be greather than 0.");
+                    return false;
+                }
+            }
+            else
+            {
+                MessageBox.Show("Floor number must be greather than 0.");
+                return false;
+            }
+
         }
 
 

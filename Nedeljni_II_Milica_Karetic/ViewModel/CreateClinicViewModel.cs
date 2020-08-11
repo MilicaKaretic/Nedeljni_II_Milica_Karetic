@@ -82,7 +82,10 @@ namespace Nedeljni_II_Milica_Karetic.ViewModel
             if (service.AddNewClinic(Clinic) != null)
             {
                 MessageBox.Show("Successfully created clinic.");
-                medicalView.Close();
+
+                Admin admin = new Admin();
+                medicalView.Close();               
+                admin.Show();
             }
         }
 
