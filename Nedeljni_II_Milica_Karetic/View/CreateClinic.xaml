@@ -1,0 +1,232 @@
+﻿<Window x:Class="Nedeljni_II_Milica_Karetic.View.CreateClinic"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Nedeljni_II_Milica_Karetic.View"
+        xmlns:c="clr-namespace:Nedeljni_II_Milica_Karetic.Converter"
+        xmlns:vm="clr-namespace:Nedeljni_II_Milica_Karetic.Model"
+        mc:Ignorable="d"
+        Title="CreateClinic" Height="600" Width="800">
+    <Window.Resources>
+        <c:RadioButtonConverter x:Key="radioButtonConverter" />
+        <vm:tblClinic x:Key="data" />
+        <!--The tool tip for the TextBox to display the validation error message.-->
+    </Window.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="20" />
+            <ColumnDefinition Width="auto" />
+            <ColumnDefinition Width="auto" />
+            <ColumnDefinition Width="auto" />
+            <ColumnDefinition Width="20" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="20" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="20" />
+        </Grid.RowDefinitions>
+        
+        <TextBlock Grid.Column="1"
+                   Grid.Row="1"
+                   Text="Name:"
+                   Margin="0,10,0,0" />
+        <TextBox Grid.Column="1"
+                 Grid.Row="2"
+                 Text="{Binding Clinic.ClinicName, UpdateSourceTrigger=PropertyChanged}"
+                 Name="txtName"
+                 MaxLength="20" />
+        <TextBlock Grid.Column="1"
+                   Grid.Row="3"
+                   Text="Creating Date:"
+                   Margin="0,10,0,0" />
+        <DatePicker Grid.Column="1"
+                    Grid.Row="4"
+                    SelectedDate="{Binding Clinic.CreatingDate, UpdateSourceTrigger=PropertyChanged }" />
+        <TextBlock Grid.Column="1"
+                   Grid.Row="5"
+                   Text="Owner:"
+                   Margin="0,10,0,0" />
+        <TextBox Grid.Column="1"
+                 Grid.Row="6"
+                 Text="{Binding Clinic.ClinicOwner, UpdateSourceTrigger=PropertyChanged}"
+                 Name="txtOwner"
+                 MaxLength="20" />
+        <TextBlock Grid.Column="1"
+                   Grid.Row="7"
+                   Text="Address:"
+                   Margin="0,10,0,0" />
+        <TextBox Grid.Column="1"
+                 Grid.Row="8"
+                 Text="{Binding Clinic.ClinicAddress, UpdateSourceTrigger=PropertyChanged}"
+                 Name="txtAddress"
+                 MaxLength="30" />
+        <TextBlock Grid.Column="1"
+                   Grid.Row="9"
+                   Text="Floors Number:"
+                   Margin="0,10,0,0" />
+        <TextBox Grid.Column="1"
+                 Grid.Row="10"
+                 Text="{Binding Clinic.ClinicFloorNumber, UpdateSourceTrigger=PropertyChanged}"
+                 PreviewTextInput="NumberValidationTextBox"
+                 Name="txtFloors"
+                 MaxLength="3" />
+        <TextBlock Grid.Column="1"
+                   Grid.Row="11"
+                   Text="Rooms Per Floor:"
+                   Margin="0,10,0,0" />
+        <TextBox Grid.Column="1"
+                 Grid.Row="12"
+                 Text="{Binding Clinic.RoomsPerFloor, UpdateSourceTrigger=PropertyChanged}"
+                 PreviewTextInput="NumberValidationTextBox"
+                 MaxLength="3" 
+                 Name="txtRooms"/>
+        <TextBlock Grid.Column="1"
+                   Grid.Row="13"
+                   Text="Balcony    *default: no"
+                   HorizontalAlignment="Center"
+                   Margin="0,10,0,0" />
+        <StackPanel Orientation="Horizontal"
+                    Grid.Column="1"
+                    Grid.Row="14">
+            <RadioButton  GroupName="Balcony"
+                          Width="70"
+                          Name="cbyes"
+                          Content="yes"
+                          IsChecked="{Binding Clinic.Balcony, 
+                Converter={StaticResource ResourceKey=radioButtonConverter}, ConverterParameter=1,
+                UpdateSourceTrigger=PropertyChanged}"></RadioButton>
+            <RadioButton  GroupName="Balcony"
+                          Width="65"
+                          Name="cbno"
+                          Content="no"
+                          IsChecked="{Binding Clinic.Balcony, 
+                Converter={StaticResource ResourceKey=radioButtonConverter}, ConverterParameter=0, 
+                 UpdateSourceTrigger=PropertyChanged}"></RadioButton>
+        </StackPanel>
+        <TextBlock Grid.Column="1"
+                   Grid.Row="15"
+                   Text="Garden    *default: no"
+                   HorizontalAlignment="Center"
+                   Margin="0,10,0,0" />
+        <StackPanel Orientation="Horizontal"
+                    Grid.Column="1"
+                    Grid.Row="16">
+            <RadioButton  GroupName="Garden"
+                          Width="70"
+                          Name="cbyesg"
+                          Content="yes"
+                          IsChecked="{Binding Clinic.Garden, 
+                Converter={StaticResource ResourceKey=radioButtonConverter}, ConverterParameter=1,
+                UpdateSourceTrigger=PropertyChanged}"></RadioButton>
+            <RadioButton  GroupName="EmergencyCase"
+                          Width="65"
+                          Name="cbnog"
+                          Content="no"
+                          IsChecked="{Binding Clinic.Garden, 
+                Converter={StaticResource ResourceKey=radioButtonConverter}, ConverterParameter=0, 
+                 UpdateSourceTrigger=PropertyChanged}"></RadioButton>
+        </StackPanel>
+        <TextBlock Grid.Column="1"
+                   Grid.Row="17"
+                   Text="Ambulance Access Points:"
+                   Margin="0,10,0,0" />
+        <TextBox Grid.Column="1"
+                 Grid.Row="18"
+                 Text="{Binding Clinic.EmergencyVehicleParkingLoots, UpdateSourceTrigger=PropertyChanged}"
+                 PreviewTextInput="NumberValidationTextBox"
+                 Name="txtAmbulance"
+                 MaxLength="3" />
+        <TextBlock Grid.Column="1"
+                   Grid.Row="19"
+                   Text="Invalid Patient Access Points:"
+                   Margin="0,10,0,0" />
+        <TextBox Grid.Column="1"
+                 Grid.Row="20"
+                 Text="{Binding Clinic.InvalidVehicleParkingLoots, UpdateSourceTrigger=PropertyChanged}"
+                 PreviewTextInput="NumberValidationTextBox"
+                 Name="txtInvalid"
+                 MaxLength="3" />
+        <Button Grid.Column="1"
+                Grid.Row="21"
+                Name="btnSave"
+                Content="Confirm"
+                Height="20"
+                Width="100"
+                HorizontalAlignment="Center"
+                Command="{Binding Save, UpdateSourceTrigger=PropertyChanged}"
+                Margin="0,10,0,0">
+            <Button.Style>
+                <Style TargetType="Button">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding ElementName=txtInvalid, Path=Text}"
+                                     Value="">
+                            <Setter Property="Button.IsEnabled"
+                                    Value="false" />
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding ElementName=txtAmbulance, Path=Text}"
+                                     Value="">
+                            <Setter Property="Button.IsEnabled"
+                                    Value="false" />
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding ElementName=txtRooms, Path=Text}"
+                                     Value="">
+                            <Setter Property="Button.IsEnabled"
+                                    Value="false" />
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding ElementName=txtFloors, Path=Text}"
+                                     Value="">
+                            <Setter Property="Button.IsEnabled"
+                                    Value="false" />
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding ElementName=txtOwner, Path=Text}"
+                                     Value="">
+                            <Setter Property="Button.IsEnabled"
+                                    Value="false" />
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding ElementName=txtName, Path=Text}"
+                                     Value="">
+                            <Setter Property="Button.IsEnabled"
+                                    Value="false" />
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding ElementName=txtAddress, Path=Text}"
+                                     Value="">
+                            <Setter Property="Button.IsEnabled"
+                                    Value="false" />
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Button.Style>
+        </Button>
+        <Button Grid.Column="1"
+                Grid.Row="22"
+                Name="btnClose"
+                Content="Close"
+                Height="20"
+                Width="100"
+                HorizontalAlignment="Center"
+                Command="{Binding Close, UpdateSourceTrigger=PropertyChanged}"
+                Margin="0,10,0,0" />
+    </Grid>
+</Window>
