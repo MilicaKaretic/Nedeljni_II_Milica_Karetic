@@ -396,7 +396,6 @@ namespace Nedeljni_II_Milica_Karetic
             }
             else
             {
-                MessageBox.Show("Please provide valid data inputs for creating new admin.");
                 return null;
             }
             

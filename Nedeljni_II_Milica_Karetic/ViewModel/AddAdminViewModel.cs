@@ -104,7 +104,11 @@ namespace Nedeljni_II_Milica_Karetic.ViewModel
             Admin.Gender = Gender;
 
             if(service.AddAdmin(Admin) != null)
-             adminView.Close();           
+            {
+                MessageBox.Show("Successfully created new admin.");
+                adminView.Close();
+            }
+                    
 
         }
 
