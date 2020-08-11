@@ -65,6 +65,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Commands\RelayCommand.cs" />
+    <Compile Include="Converter\RadioButtonConverter.cs" />
     <Compile Include="Model\ClinicDBModel.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -112,6 +113,7 @@
     <Compile Include="Validation.cs" />
     <Compile Include="ViewModel\AddAdminViewModel.cs" />
     <Compile Include="ViewModel\BaseViewModel.cs" />
+    <Compile Include="ViewModel\CreateClinicViewModel.cs" />
     <Compile Include="ViewModel\LoginViewModel.cs" />
     <Compile Include="ViewModel\MasterViewModel.cs" />
     <Compile Include="View\AddAdmin.xaml.cs">
@@ -119,6 +121,9 @@
     </Compile>
     <Compile Include="View\Admin.xaml.cs">
       <DependentUpon>Admin.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\CreateClinic.xaml.cs">
+      <DependentUpon>CreateClinic.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Doctor.xaml.cs">
       <DependentUpon>Doctor.xaml</DependentUpon>
@@ -165,6 +170,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Admin.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\CreateClinic.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -16,6 +16,7 @@ namespace Nedeljni_II_Milica_Karetic.ViewModel
 
         Login view;
         Service service = new Service();
+        Validation v = new Validation();
 
         #region Constructor
         public LoginViewModel(Login loginView)
@@ -320,9 +321,18 @@ namespace Nedeljni_II_Milica_Karetic.ViewModel
 
                         if(service.IsAdmin(LoggedUser.CurrentUser.UserID))
                         {
-                            Admin admin = new Admin();
-                            view.Close();
-                            admin.Show();
+                            if(v.AnyClinics())
+                            {
+                                CreateClinic clinic = new CreateClinic();
+                                clinic.Show();
+                            }
+                            else
+                            {
+                                Admin admin = new Admin();
+                                view.Close();
+                                admin.Show();
+                            }
+                           
                         }
                         else if (service.IsDoctor(LoggedUser.CurrentUser.UserID))
                         {

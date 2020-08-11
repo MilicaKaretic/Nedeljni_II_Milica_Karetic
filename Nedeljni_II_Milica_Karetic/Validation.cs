@@ -84,6 +84,32 @@ namespace Nedeljni_II_Milica_Karetic
                 return true;
         }
 
-       
+        public bool AnyClinics()
+        {
+            try
+            {
+                using (ClinicDBEntities db = new ClinicDBEntities())
+                {
+                    if (db.tblClinics.Any())
+                    {
+                        return false;
+                    }
+                    else return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine(ex.Message);
+                return false;
+            }
+        }
+
+        public bool ValidClinic(tblClinic clinic)
+        {
+            return true;
+        }
+
+
+
     }
 }

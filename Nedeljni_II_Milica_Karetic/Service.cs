@@ -400,5 +400,49 @@ namespace Nedeljni_II_Milica_Karetic
             }
             
         }
+        
+        public tblClinic AddNewClinic(tblClinic clinic)
+        {
+            if (v.ValidClinic(clinic))
+            {
+                try
+                {
+                    using (ClinicDBEntities context = new ClinicDBEntities())
+                    {
+
+                        //clinic
+                        tblClinic newClinic = new tblClinic();
+                        newClinic.ClinicName = clinic.ClinicName;
+                        newClinic.CreatingDate = clinic.CreatingDate;
+                        newClinic.ClinicOwner = clinic.ClinicOwner;
+                        newClinic.ClinicAddress = clinic.ClinicAddress;
+                        newClinic.RoomsPerFloor = clinic.RoomsPerFloor;
+                        newClinic.ClinicFloorNumber = clinic.ClinicFloorNumber;
+                        newClinic.Garden = clinic.Garden;
+                        newClinic.Balcony = clinic.Balcony;
+                        newClinic.EmergencyVehicleParkingLoots = clinic.EmergencyVehicleParkingLoots;
+                        newClinic.InvalidVehicleParkingLoots = clinic.InvalidVehicleParkingLoots;
+
+                        context.tblClinics.Add(newClinic);
+                        context.SaveChanges();                      
+
+                        clinic.ClinicID = newClinic.ClinicID;
+
+                        return clinic;
+
+
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine("Exception" + ex.Message.ToString());
+                    return null;
+                }
+            }
+            else
+            {
+                return null;
+            }
+        }
     }
 }
