@@ -118,6 +118,7 @@
     <Compile Include="ViewModel\LoginViewModel.cs" />
     <Compile Include="ViewModel\MasterViewModel.cs" />
     <Compile Include="ViewModel\UpdateClinicViewModel.cs" />
+    <Compile Include="ViewModel\UpdateMaintanceViewModel.cs" />
     <Compile Include="View\AddAdmin.xaml.cs">
       <DependentUpon>AddAdmin.xaml</DependentUpon>
     </Compile>
@@ -147,6 +148,9 @@
     </Compile>
     <Compile Include="View\UpdateClinic.xaml.cs">
       <DependentUpon>UpdateClinic.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\UpdateMaintance.xaml.cs">
+      <DependentUpon>UpdateMaintance.xaml</DependentUpon>
     </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -207,6 +211,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\UpdateClinic.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\UpdateMaintance.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

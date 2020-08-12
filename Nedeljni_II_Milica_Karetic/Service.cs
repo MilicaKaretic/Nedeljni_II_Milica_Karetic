@@ -68,6 +68,7 @@ namespace Nedeljni_II_Milica_Karetic
             }
         }
 
+
         /// <summary>
         /// Gets all information about users
         /// </summary>
@@ -102,6 +103,28 @@ namespace Nedeljni_II_Milica_Karetic
                 {
                     List<tblClinicMaintenance> list = new List<tblClinicMaintenance>();
                     list = (from x in context.tblClinicMaintenances select x).ToList();
+                    return list;
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("Exception" + ex.Message.ToString());
+                return null;
+            }
+        }
+
+        /// <summary>
+        /// Gets all information about users
+        /// </summary>
+        /// <returns>a list of found users</returns>
+        public List<vwClinicMaintenance> GetAllMaintenancesView()
+        {
+            try
+            {
+                using (ClinicDBEntities context = new ClinicDBEntities())
+                {
+                    List<vwClinicMaintenance> list = new List<vwClinicMaintenance>();
+                    list = (from x in context.vwClinicMaintenances select x).ToList();
                     return list;
                 }
             }
