@@ -7,6 +7,17 @@
         mc:Ignorable="d"
         Title="Admin" Height="450" Width="800">
     <Grid>
-        
+        <Button Content="Update clinic"
+                HorizontalAlignment="Left"
+                Margin="75,50,0,0"
+                VerticalAlignment="Top"
+                Width="75"
+                Command="{Binding UpdateClinic, UpdateSourceTrigger=PropertyChanged}" />
+        <Button Content="Log out"
+                HorizontalAlignment="Left"
+                Margin="615,50,0,0"
+                VerticalAlignment="Top"
+                Width="75"
+                Command="{Binding Logout, UpdateSourceTrigger=PropertyChanged}"/>
     </Grid>
 </Window>
