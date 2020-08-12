@@ -24,6 +24,8 @@ namespace Nedeljni_II_Milica_Karetic.ViewModel
         public UpdateMaintanceViewModel(UpdateMaintance updateViewOpen)
         {
             updateView = updateViewOpen;
+            Genders = GetBothGender();
+            Maintance = new vwClinicMaintenance();
         }
 
         public UpdateMaintanceViewModel(UpdateMaintance updateViewOpen, vwClinicMaintenance updateMaintance)
@@ -119,44 +121,94 @@ namespace Nedeljni_II_Milica_Karetic.ViewModel
 
         private void SaveExecute()
         {
+            
             try
             {
                 tblClinicMaintenance updateMaintance = new tblClinicMaintenance();
                 tblUser updateUser = new tblUser();
                 using (ClinicDBEntities db = new ClinicDBEntities())
                 {
-                    updateMaintance = db.tblClinicMaintenances.Where(m => m.UserID == Maintance.UserID).FirstOrDefault();
-                    updateUser = db.tblUsers.Where(m => m.UserID == Maintance.UserID).FirstOrDefault();
-
-
-                    updateUser.FirstName = Maintance.FirstName;
-                    updateUser.LastName = Maintance.LastName;
-                    updateUser.IdentificationCard = Maintance.IdentificationCard;
-                    updateUser.Gender = Maintance.Gender;
-                    updateUser.DateOfBirth = Maintance.DateOfBirth;
-                    updateUser.Citizenship = Maintance.Citizenship;
-                    updateUser.Username = Maintance.Username;
-                    updateUser.UserPassword = Maintance.UserPassword;
-
-                    
-                    updateMaintance.DisabledAccessabilityResponsibility = Maintance.DisabledAccessabilityResponsibility;
-                    if (Maintance.DisabledAccessabilityResponsibility == false)
+                    if(Maintance.MaintenanceID == 0)
                     {
-                        updateMaintance.ClinicExtentionAllowed = true;
-                        Maintance.ClinicExtentionAllowed = true;
-                    }                       
+                        Maintance.Gender = Gender;
+
+                        updateUser.FirstName = Maintance.FirstName;
+                        updateUser.LastName = Maintance.LastName;
+                        updateUser.IdentificationCard = Maintance.IdentificationCard;
+                        updateUser.Gender = Maintance.Gender;
+                        updateUser.DateOfBirth = Maintance.DateOfBirth;
+                        updateUser.Citizenship = Maintance.Citizenship;
+                        updateUser.Username = Maintance.Username;
+                        updateUser.UserPassword = Maintance.UserPassword;
+
+                        db.tblUsers.Add(updateUser);
+                        db.SaveChanges();
+
+                        Maintance.UserID = updateUser.UserID;
+
+                        updateMaintance.DisabledAccessabilityResponsibility = Maintance.DisabledAccessabilityResponsibility;
+                        updateMaintance.UserID = Maintance.UserID;
+                        if (Maintance.DisabledAccessabilityResponsibility == false)
+                        {
+                            updateMaintance.ClinicExtentionAllowed = true;
+                            Maintance.ClinicExtentionAllowed = true;
+                        }
+                        else
+                        {
+                            updateMaintance.ClinicExtentionAllowed = false;
+                            Maintance.ClinicExtentionAllowed = false;
+                        }
+
+                        db.tblClinicMaintenances.Add(updateMaintance);
+                        db.SaveChanges();
+
+                        Maintance.MaintenanceID = updateMaintance.MaintenanceID;
+
+                        MessageBox.Show("Maintance Created Successfully!");
+
+                        Admin ad = new Admin();
+                        updateView.Close();
+                        ad.Show();
+
+                    }
                     else
                     {
-                        updateMaintance.ClinicExtentionAllowed = false;
-                        Maintance.ClinicExtentionAllowed = false;
-                    }                       
+                        updateMaintance = db.tblClinicMaintenances.Where(m => m.UserID == Maintance.UserID).FirstOrDefault();
+                        updateUser = db.tblUsers.Where(m => m.UserID == Maintance.UserID).FirstOrDefault();
 
-                    db.SaveChanges();
+
+                        updateUser.FirstName = Maintance.FirstName;
+                        updateUser.LastName = Maintance.LastName;
+                        updateUser.IdentificationCard = Maintance.IdentificationCard;
+                        updateUser.Gender = Maintance.Gender;
+                        updateUser.DateOfBirth = Maintance.DateOfBirth;
+                        updateUser.Citizenship = Maintance.Citizenship;
+                        updateUser.Username = Maintance.Username;
+                        updateUser.UserPassword = Maintance.UserPassword;
+
+
+                        updateMaintance.DisabledAccessabilityResponsibility = Maintance.DisabledAccessabilityResponsibility;
+                        if (Maintance.DisabledAccessabilityResponsibility == false)
+                        {
+                            updateMaintance.ClinicExtentionAllowed = true;
+                            Maintance.ClinicExtentionAllowed = true;
+                        }
+                        else
+                        {
+                            updateMaintance.ClinicExtentionAllowed = false;
+                            Maintance.ClinicExtentionAllowed = false;
+                        }
+
+                        db.SaveChanges();
+
+                        MessageBox.Show("Maintance Updated Successfully!");
+                        Admin ad = new Admin();
+                        updateView.Close();
+                        ad.Show();
+                    }
+                    
                 }
-                MessageBox.Show("Maintance Updated Successfully!");
-                Admin ad = new Admin();
-                updateView.Close();
-                ad.Show();
+                
             }
             catch (Exception ex)
             {

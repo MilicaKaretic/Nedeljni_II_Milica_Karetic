@@ -128,7 +128,9 @@ namespace Nedeljni_II_Milica_Karetic.ViewModel
 
         private void CreateMaintanceExecute()
         {
-
+            UpdateMaintance create = new UpdateMaintance();
+            create.Show();
+            admin.Close();
         }
 
         private bool CanCreateMaintanceExecute()
