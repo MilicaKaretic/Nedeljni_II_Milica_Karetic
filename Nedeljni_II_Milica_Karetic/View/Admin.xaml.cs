@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Nedeljni_II_Milica_Karetic.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -22,6 +23,7 @@ namespace Nedeljni_II_Milica_Karetic.View
         public Admin()
         {
             InitializeComponent();
+            this.DataContext = new AdminViewModel(this);
         }
     }
 }

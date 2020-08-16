@@ -13,6 +13,7 @@ namespace Nedeljni_II_Milica_Karetic
     class Service
     {
         Validation v = new Validation();
+
         /// <summary>
         /// Get clinic user from file
         /// </summary>
@@ -47,7 +48,7 @@ namespace Nedeljni_II_Milica_Karetic
         }
 
         /// <summary>
-        /// Gets all information about users
+        /// Gets all information about all users
         /// </summary>
         /// <returns>a list of found users</returns>
         public List<tblUser> GetAllUsers()
@@ -68,8 +69,9 @@ namespace Nedeljni_II_Milica_Karetic
             }
         }
 
+
         /// <summary>
-        /// Gets all information about users
+        /// Gets all information about admins
         /// </summary>
         /// <returns>a list of found users</returns>
         public List<tblClinicAdministrator> GetAllAdmins()
@@ -91,7 +93,7 @@ namespace Nedeljni_II_Milica_Karetic
         }
 
         /// <summary>
-        /// Gets all information about users
+        /// Gets all information about maintencances
         /// </summary>
         /// <returns>a list of found users</returns>
         public List<tblClinicMaintenance> GetAllMaintenances()
@@ -112,9 +114,31 @@ namespace Nedeljni_II_Milica_Karetic
             }
         }
 
+        /// <summary>
+        /// Gets all information about maintenances
+        /// </summary>
+        /// <returns>a list of found users</returns>
+        public List<vwClinicMaintenance> GetAllMaintenancesView()
+        {
+            try
+            {
+                using (ClinicDBEntities context = new ClinicDBEntities())
+                {
+                    List<vwClinicMaintenance> list = new List<vwClinicMaintenance>();
+                    list = (from x in context.vwClinicMaintenances select x).ToList();
+                    return list;
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("Exception" + ex.Message.ToString());
+                return null;
+            }
+        }
+
 
         /// <summary>
-        /// Gets all information about users
+        /// Gets all information about managers
         /// </summary>
         /// <returns>a list of found users</returns>
         public List<tblClinicManager> GetAllManagers()
@@ -136,7 +160,7 @@ namespace Nedeljni_II_Milica_Karetic
         }
 
         /// <summary>
-        /// Gets all information about users
+        /// Gets all information about doctors
         /// </summary>
         /// <returns>a list of found users</returns>
         public List<tblClinicDoctor> GetAllDoctors()
@@ -158,7 +182,7 @@ namespace Nedeljni_II_Milica_Karetic
         }
 
         /// <summary>
-        /// Gets all information about users
+        /// Gets all information about patients
         /// </summary>
         /// <returns>a list of found users</returns>
         public List<tblClinicPatient> GetAllPatients()
@@ -180,7 +204,7 @@ namespace Nedeljni_II_Milica_Karetic
         }
 
         /// <summary>
-        /// Gets all information about users
+        /// Gets all information about clicnics
         /// </summary>
         /// <returns>a list of found users</returns>
         public List<tblClinic> GetAllClinics()
@@ -201,6 +225,11 @@ namespace Nedeljni_II_Milica_Karetic
             }
         }
 
+        /// <summary>
+        /// check if is admin
+        /// </summary>
+        /// <param name="userID"></param>
+        /// <returns></returns>
         public bool IsAdmin(int userID)
         {
             try
@@ -225,6 +254,11 @@ namespace Nedeljni_II_Milica_Karetic
             }
         }
 
+        /// <summary>
+        /// chech if is maintenance
+        /// </summary>
+        /// <param name="userID"></param>
+        /// <returns></returns>
         public bool IsMaintenance(int userID)
         {
             try
@@ -249,6 +283,11 @@ namespace Nedeljni_II_Milica_Karetic
             }
         }
 
+        /// <summary>
+        /// check if is manager
+        /// </summary>
+        /// <param name="userID"></param>
+        /// <returns></returns>
         public bool IsManager(int userID)
         {
             try
@@ -273,6 +312,11 @@ namespace Nedeljni_II_Milica_Karetic
             }
         }
 
+        /// <summary>
+        /// check if is doctor
+        /// </summary>
+        /// <param name="userID"></param>
+        /// <returns></returns>
         public bool IsDoctor(int userID)
         {
             try
@@ -297,6 +341,11 @@ namespace Nedeljni_II_Milica_Karetic
             }
         }
 
+        /// <summary>
+        /// check if is patient
+        /// </summary>
+        /// <param name="userID"></param>
+        /// <returns></returns>
         public bool IsPatient(int userID)
         {
             try
@@ -347,7 +396,11 @@ namespace Nedeljni_II_Milica_Karetic
             }
         }
 
-
+        /// <summary>
+        /// add new admin
+        /// </summary>
+        /// <param name="admin"></param>
+        /// <returns></returns>
         public vwClinicAdministrator AddAdmin(vwClinicAdministrator admin)
         {
             if(v.ValidAdmin(admin))
@@ -400,7 +453,88 @@ namespace Nedeljni_II_Milica_Karetic
             }
             
         }
+        /// <summary>
+        /// unique username
+        /// </summary>
+        /// <param name="username"></param>
+        /// <returns></returns>
+        private bool UniqueUsername(string username)
+        {
+            List<vwClinicMaintenance> list = new List<vwClinicMaintenance>();
+            list = GetAllMaintenancesView();
+            for (int i = 0; i < list.Count; i++)
+            {
+                if (list[i].Username == username)
+                    return false;
+            }
+            return true;
+        }
+
+        /// <summary>
+        /// unique id card
+        /// </summary>
+        /// <param name="iden"></param>
+        /// <returns></returns>
+        private bool UniqueIDcard(string iden)
+        {
+            List<vwClinicMaintenance> list = new List<vwClinicMaintenance>();
+            list = GetAllMaintenancesView();
+            for (int i = 0; i < list.Count; i++)
+            {
+                if (list[i].IdentificationCard == iden)
+                    return false;
+            }
+            return true;
+        }
+
+        /// <summary>
+        /// validation for maintenance
+        /// </summary>
+        /// <param name="maintenance"></param>
+        /// <returns></returns>
+        public bool IsValidMaintenance(vwClinicMaintenance maintenance)
+        {
+            if(maintenance.IdentificationCard.Length == 9)
+            {
+                if (UniqueUsername(maintenance.Username))
+                {
+                    if(UniqueIDcard(maintenance.IdentificationCard))
+                    {
+                        if(maintenance.Gender != null)
+                        {
+                            return true;
+                        }
+                        else
+                        {
+                            MessageBox.Show("Choose gender");
+                            return false;
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("That ID card is taken.Try again.");
+                        return false;
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("That username is taken.Try again.");
+                    return false;
+                }
+
+            }
+            else
+            {
+                MessageBox.Show("ID card number must have 9 numbers.");
+                return false;
+            }
+        }
         
+        /// <summary>
+        /// add new clicni
+        /// </summary>
+        /// <param name="clinic">clinic to add</param>
+        /// <returns>added clinic</returns>
         public tblClinic AddNewClinic(tblClinic clinic)
         {
             if (v.ValidClinic(clinic))
