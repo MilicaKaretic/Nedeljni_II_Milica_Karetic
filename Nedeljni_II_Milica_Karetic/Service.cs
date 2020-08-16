@@ -423,6 +423,67 @@ namespace Nedeljni_II_Milica_Karetic
             }
             
         }
+        private bool UniqueUsername(string username)
+        {
+            List<vwClinicMaintenance> list = new List<vwClinicMaintenance>();
+            list = GetAllMaintenancesView();
+            for (int i = 0; i < list.Count; i++)
+            {
+                if (list[i].Username == username)
+                    return false;
+            }
+            return true;
+        }
+
+        private bool UniqueIDcard(string iden)
+        {
+            List<vwClinicMaintenance> list = new List<vwClinicMaintenance>();
+            list = GetAllMaintenancesView();
+            for (int i = 0; i < list.Count; i++)
+            {
+                if (list[i].IdentificationCard == iden)
+                    return false;
+            }
+            return true;
+        }
+
+        public bool IsValidMaintenance(vwClinicMaintenance maintenance)
+        {
+            if(maintenance.IdentificationCard.Length == 9)
+            {
+                if (UniqueUsername(maintenance.Username))
+                {
+                    if(UniqueIDcard(maintenance.IdentificationCard))
+                    {
+                        if(maintenance.Gender != null)
+                        {
+                            return true;
+                        }
+                        else
+                        {
+                            MessageBox.Show("Choose gender");
+                            return false;
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("That ID card is taken.Try again.");
+                        return false;
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("That username is taken.Try again.");
+                    return false;
+                }
+
+            }
+            else
+            {
+                MessageBox.Show("ID card number must have 9 numbers.");
+                return false;
+            }
+        }
         
         public tblClinic AddNewClinic(tblClinic clinic)
         {
